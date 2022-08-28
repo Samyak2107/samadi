@@ -1,0 +1,8 @@
+@media (max-width: 590px) {
+  .modal-textfield {
+    width: 100%;
+  }
+  .modal-textfield-input {
+    min-width: 97% !important;
+  }
+}
