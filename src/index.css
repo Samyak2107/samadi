@@ -22,3 +22,11 @@ button {
   text-decoration: none;
   margin-right: 20px;
 }
+
+.MuiInputLabel-root.Mui-focused {
+  color: #f93d6e !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #f93d6e !important;
+}

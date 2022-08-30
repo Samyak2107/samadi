@@ -377,50 +377,36 @@ function Header() {
                   },
                 }}
               >
-                {/* <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
+                <div style={{ position: "relative" }}>
+                  <p
+                    style={{
+                      position: "absolute",
+                      top: "-3px",
+                      left: "21px",
+                      fontWeight: "600",
+                    }}
+                  >
+                    3
+                  </p>
+                  <Tooltip title="Cart">
+                    <IconButton aria-label="cart" size="large">
+                      <ShoppingCartOutlinedIcon
+                        style={{ color: "white" }}
+                        fontSize="inherit"
+                      />
+                    </IconButton>
+                  </Tooltip>
+                </div>
+
+                <Tooltip title="Wishlist">
+                  <IconButton aria-label="wishlist" size="large">
+                    <ShoppingBagOutlinedIcon
+                      style={{ color: "white" }}
+                      fontSize="inherit"
+                      sx={{ mr: 2 }}
                     />
                   </IconButton>
                 </Tooltip>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu> */}
-                <IconButton aria-label="cart" size="large">
-                  <ShoppingCartOutlinedIcon
-                    style={{ color: "white" }}
-                    fontSize="inherit"
-                  />
-                </IconButton>
-
-                <IconButton aria-label="wishlist" size="large">
-                  <ShoppingBagOutlinedIcon
-                    style={{ color: "white" }}
-                    fontSize="inherit"
-                    sx={{ mr: 2 }}
-                  />
-                </IconButton>
 
                 {userLoggedin ? (
                   <>

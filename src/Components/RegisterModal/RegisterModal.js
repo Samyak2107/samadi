@@ -9,9 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { TextField } from "@mui/material";
 import Box from "@mui/material/Box";
-import "./LoginModal.css";
-import RegisterModal from "../RegisterModal/RegisterModal";
-import ForgotPasswordModal from "../ForgotPasswordModal/ForgotPasswordModal";
+import ForgotPasswordModalViaReg from "../ForgotPasswordModal/ForgotPasswordModalViaReg";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -51,10 +49,12 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function LoginModal({ open, onClose }) {
+export default function RegisterModal({ open, onClose, closeBoth }) {
   const [state, setState] = React.useState({
+    name: "",
     email: "",
     password: "",
+    cpassword: "",
   });
 
   const handleChange = (event) => {
@@ -65,24 +65,12 @@ export default function LoginModal({ open, onClose }) {
     onClose();
   };
 
-  const [openRegisterModal, setOpenRegisterModal] = React.useState(false);
-
-  const handleRegisterModalOpening = () => {
-    setOpenRegisterModal(true);
-    //onClose();
-  };
-
-  const closeBothWindows = () => {
-    setOpenRegisterModal(false);
-    onClose();
-  };
-
   const [openForgotPasswordModal, setOpenForgotPasswordModal] =
     React.useState(false);
 
   const handleForgotPasswordModal = () => {
     setOpenForgotPasswordModal(true);
-    onClose();
+    closeBoth();
   };
 
   return (
@@ -109,11 +97,11 @@ export default function LoginModal({ open, onClose }) {
         >
           <div>
             <h2 style={{ color: "#F93D6E" }}>Welcome,</h2>
-            <h3>Login with Samadi</h3>
+            <h3>Register with Samadi</h3>
           </div>
 
           <div>
-            <CloseIcon onClick={onClose} style={{ cursor: "pointer" }} />
+            <CloseIcon onClick={closeBoth} style={{ cursor: "pointer" }} />
           </div>
         </Box>
         <DialogContent dividers>
@@ -128,6 +116,21 @@ export default function LoginModal({ open, onClose }) {
           >
             <div className="modal-textfield">
               <TextField
+                id="outlined-name-input"
+                label="Name"
+                type="text"
+                size="small"
+                sx={{ m: 1 }}
+                className="modal-textfield-input"
+                name="name"
+                value={state.name}
+                onChange={(event) => handleChange(event)}
+                //error={true}
+                //autoComplete="current-password"
+              />
+            </div>
+            <div className="modal-textfield">
+              <TextField
                 id="outlined-email-input"
                 label="Email"
                 type="email"
@@ -137,10 +140,20 @@ export default function LoginModal({ open, onClose }) {
                 name="email"
                 value={state.email}
                 onChange={(event) => handleChange(event)}
-                //error={true}
                 //autoComplete="current-password"
               />
             </div>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexWrap: "wrap",
+              flexGrow: 1,
+            }}
+          >
             <div className="modal-textfield">
               <TextField
                 id="outlined-password-input"
@@ -151,6 +164,20 @@ export default function LoginModal({ open, onClose }) {
                 className="modal-textfield-input"
                 name="password"
                 value={state.password}
+                onChange={(event) => handleChange(event)}
+                //autoComplete="current-password"
+              />
+            </div>
+            <div className="modal-textfield">
+              <TextField
+                id="outlined-cpassword-input"
+                label="Confirm Password"
+                type="password"
+                size="small"
+                sx={{ m: 1 }}
+                className="modal-textfield-input"
+                name="cpassword"
+                value={state.cpassword}
                 onChange={(event) => handleChange(event)}
                 //autoComplete="current-password"
               />
@@ -172,7 +199,7 @@ export default function LoginModal({ open, onClose }) {
               sx={{ m: 1 }}
               //onClick={() => setOpenLoginModal(true)}
             >
-              Login
+              Register
             </Button>
           </div>
 
@@ -240,20 +267,14 @@ export default function LoginModal({ open, onClose }) {
               color: "#F93D6E",
               cursor: "pointer",
             }}
-            onClick={handleRegisterModalOpening}
+            onClick={onClose}
           >
-            New user ? Sign up
+            Already registered ? Login
           </p>
         </div>
       </BootstrapDialog>
 
-      <RegisterModal
-        open={openRegisterModal}
-        onClose={() => setOpenRegisterModal(false)}
-        closeBoth={closeBothWindows}
-      />
-
-      <ForgotPasswordModal
+      <ForgotPasswordModalViaReg
         open={openForgotPasswordModal}
         onClose={() => setOpenForgotPasswordModal(false)}
       />
