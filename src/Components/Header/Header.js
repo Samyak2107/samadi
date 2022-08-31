@@ -37,7 +37,13 @@ import LoginModal from "../LoginModal/LoginModal";
 function Header() {
   const pages = ["Men", "Women", "Kids", "Exclusive"];
   const settingsPostLogin = ["Profile", "Cart", "Wishlist", "Orders", "Logout"];
-  const settingsGuestLogin = ["Login", "Cart", "Wishlist", "Orders"];
+  // const settingsGuestLogin = ["Login", "Cart", "Wishlist", "Orders"];
+  const settingsGuestLogin = [
+    { title: "Login", method: () => setOpenLoginModal(true) },
+    { title: "Cart", method: "" },
+    { title: "Wishlist", method: "" },
+    { title: "Orders", method: "" },
+  ];
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -382,11 +388,11 @@ function Header() {
                     style={{
                       position: "absolute",
                       top: "-3px",
-                      left: "21px",
+                      left: "21.5px",
                       fontWeight: "600",
                     }}
                   >
-                    3
+                    0
                   </p>
                   <Tooltip title="Cart">
                     <IconButton aria-label="cart" size="large">
@@ -560,8 +566,11 @@ function Header() {
                         <Divider />
                         {settingsGuestLogin.map((setting) => (
                           <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                            <Typography textAlign="center">
-                              {setting}
+                            <Typography
+                              textAlign="center"
+                              onClick={setting.method}
+                            >
+                              {setting.title}
                             </Typography>
                           </MenuItem>
                         ))}
